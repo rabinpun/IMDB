@@ -14,7 +14,7 @@ struct HomeScreen: View {
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Movie.updatedAt, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Movie>
+    private var movies: FetchedResults<Movie>
     
     
     @State private var searchText = ""
@@ -31,46 +31,48 @@ struct HomeScreen: View {
     @ViewBuilder
     func moviesList() -> some View {
         List {
-            ForEach(items) { item in
+            ForEach(movies) { movie in
                 HStack {
-                    posterImage(for: item)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 50, height: 50)
-                        .cornerRadius(2)
-                    Text(item.title ?? "No title")
+                    posterImage(for: movie)
+                    
+                    titleAndReleaseDate(for: movie)
+                    
                     Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundStyle(.secondary)
-                        .font(.caption)
+                    
+                    Image.chevronRight
                 }
             }
         }
         .overlay(
-            Group {
-                    if items.isEmpty {
-                        Text("Oops, No results found.")
-                    }
-                }
+            movies.isEmpty ? Text("Oops, No results found.") : nil
         )
     }
     
     @ViewBuilder
     func posterImage(for movie: Movie) -> some View {
-        if let posterPath = movie.posterImagePath, let url = URL(string: "https://image.tmdb.org/t/p/original/\(posterPath)") {
-            AsyncImage(url: url)
-        } else {
-            Image(systemName: "photo")
-                .resizable()
+        Group {
+            if let posterPath = movie.posterImagePath, let url = URL(string: "https://image.tmdb.org/t/p/original/\(posterPath)") {
+                CachedAsyncImage(url: url)
+                    .aspectRatio(contentMode: .fill)
+            } else {
+                Image.photoPlaceHolder
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            }
+        }
+        .frame(width: 50, height: 50)
+        .cornerRadius(2)
+    }
+    
+    @ViewBuilder
+    func titleAndReleaseDate(for movie: Movie) -> some View {
+        VStack(alignment: .leading) {
+            Text(movie.title ?? "Title unavailable")
+                .font(.title2)
+            Text("Released on: \(movie.releaseDate?.formattedDate ?? "Unavailable")")
         }
     }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 #Preview {
     HomeScreen().environment(\.managedObjectContext, DataStack.preview.container.viewContext)

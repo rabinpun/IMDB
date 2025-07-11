@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  HomeScreen.swift
 //  IMDB
 //
 //  Created by Rabin Pun on 11/07/2025.
@@ -8,13 +8,14 @@
 import SwiftUI
 import CoreData
 
-struct HomeView: View {
+struct HomeScreen: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Movie.updatedAt, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var items: FetchedResults<Movie>
+    
     
     @State private var searchText = ""
     @State private var showCancelButton: Bool = false
@@ -32,7 +33,11 @@ struct HomeView: View {
         List {
             ForEach(items) { item in
                 HStack {
-                    Text(item.timestamp!, formatter: itemFormatter)
+                    posterImage(for: item)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 50, height: 50)
+                        .cornerRadius(2)
+                    Text(item.title ?? "No title")
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundStyle(.secondary)
@@ -48,6 +53,16 @@ struct HomeView: View {
                 }
         )
     }
+    
+    @ViewBuilder
+    func posterImage(for movie: Movie) -> some View {
+        if let posterPath = movie.posterImagePath, let url = URL(string: "https://image.tmdb.org/t/p/original/\(posterPath)") {
+            AsyncImage(url: url)
+        } else {
+            Image(systemName: "photo")
+                .resizable()
+        }
+    }
 }
 
 private let itemFormatter: DateFormatter = {
@@ -58,5 +73,5 @@ private let itemFormatter: DateFormatter = {
 }()
 
 #Preview {
-    HomeView().environment(\.managedObjectContext, DataStack.preview.container.viewContext)
+    HomeScreen().environment(\.managedObjectContext, DataStack.preview.container.viewContext)
 }

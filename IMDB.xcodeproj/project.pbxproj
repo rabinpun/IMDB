@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B264A2ED2E1FECEA00114549 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B264A2EC2E1FECEA00114549 /* Item+CoreDataProperties.swift */; };
-		B264A2EE2E1FECEA00114549 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B264A2EB2E1FECEA00114549 /* Item+CoreDataClass.swift */; };
+		B28CEAB52E20ED8600F222AC /* Search+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28CEAB22E20ED8600F222AC /* Search+CoreDataClass.swift */; };
+		B28CEAB62E20ED8600F222AC /* Search+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28CEAB32E20ED8600F222AC /* Search+CoreDataProperties.swift */; };
+		B28CEABA2E20FC3100F222AC /* Movie+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28CEAB82E20FC3100F222AC /* Movie+CoreDataClass.swift */; };
+		B28CEABB2E20FC3100F222AC /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28CEAB92E20FC3100F222AC /* Movie+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,8 +34,10 @@
 		B264A2692E1F9C4200114549 /* IMDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IMDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B264A27C2E1F9C4300114549 /* IMDBTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IMDBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B264A2862E1F9C4300114549 /* IMDBUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IMDBUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B264A2EB2E1FECEA00114549 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B264A2EC2E1FECEA00114549 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B28CEAB22E20ED8600F222AC /* Search+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Search+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B28CEAB32E20ED8600F222AC /* Search+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Search+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B28CEAB82E20FC3100F222AC /* Movie+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B28CEAB92E20FC3100F222AC /* Movie+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -82,8 +86,10 @@
 		B264A2602E1F9C4200114549 = {
 			isa = PBXGroup;
 			children = (
-				B264A2EB2E1FECEA00114549 /* Item+CoreDataClass.swift */,
-				B264A2EC2E1FECEA00114549 /* Item+CoreDataProperties.swift */,
+				B28CEAB82E20FC3100F222AC /* Movie+CoreDataClass.swift */,
+				B28CEAB92E20FC3100F222AC /* Movie+CoreDataProperties.swift */,
+				B28CEAB22E20ED8600F222AC /* Search+CoreDataClass.swift */,
+				B28CEAB32E20ED8600F222AC /* Search+CoreDataProperties.swift */,
 				B264A26B2E1F9C4200114549 /* IMDB */,
 				B264A27F2E1F9C4300114549 /* IMDBTests */,
 				B264A2892E1F9C4300114549 /* IMDBUITests */,
@@ -245,8 +251,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B264A2ED2E1FECEA00114549 /* Item+CoreDataProperties.swift in Sources */,
-				B264A2EE2E1FECEA00114549 /* Item+CoreDataClass.swift in Sources */,
+				B28CEAB52E20ED8600F222AC /* Search+CoreDataClass.swift in Sources */,
+				B28CEAB62E20ED8600F222AC /* Search+CoreDataProperties.swift in Sources */,
+				B28CEABA2E20FC3100F222AC /* Movie+CoreDataClass.swift in Sources */,
+				B28CEABB2E20FC3100F222AC /* Movie+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

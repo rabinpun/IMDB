@@ -31,9 +31,14 @@ class DataStack: ObservableObject {
     
     private static func seedMockData(container: NSPersistentContainer) {
         let viewContext = container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+        for i in 0..<10 {
+            let movie = Movie(context: viewContext)
+            movie.id = Int32(i)
+            movie.title = "Movie \(i)"
+            movie.overview = "Overview \(i)"
+            movie.releaseDate = Date()
+            movie.posterImagePath = i % 2 == 0 ? "3SyJUsCH39jAWE5fB0EAV1c88cs.jpg" : nil
+            movie.updatedAt = Date()
         }
         do {
             try viewContext.save()

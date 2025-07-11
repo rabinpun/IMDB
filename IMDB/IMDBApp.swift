@@ -9,12 +9,12 @@ import SwiftUI
 
 @main
 struct IMDBApp: App {
-    let persistenceController = PersistenceController.shared
+    @StateObject var dataStack = DataStack()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            HomeView()
+                .environment(\.managedObjectContext, dataStack.container.viewContext)
         }
     }
 }

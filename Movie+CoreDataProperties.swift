@@ -23,6 +23,7 @@ extension Movie {
     @NSManaged public var title: String?
     @NSManaged public var updatedAt: Date?
     @NSManaged public var movieToSearch: NSSet?
+    @NSManaged public var movieToSortOrder: NSSet?
 
 }
 
@@ -40,6 +41,23 @@ extension Movie {
 
     @objc(removeMovieToSearch:)
     @NSManaged public func removeFromMovieToSearch(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for movieToSortOrder
+extension Movie {
+
+    @objc(addMovieToSortOrderObject:)
+    @NSManaged public func addToMovieToSortOrder(_ value: SortOrder)
+
+    @objc(removeMovieToSortOrderObject:)
+    @NSManaged public func removeFromMovieToSortOrder(_ value: SortOrder)
+
+    @objc(addMovieToSortOrder:)
+    @NSManaged public func addToMovieToSortOrder(_ values: NSSet)
+
+    @objc(removeMovieToSortOrder:)
+    @NSManaged public func removeFromMovieToSortOrder(_ values: NSSet)
 
 }
 

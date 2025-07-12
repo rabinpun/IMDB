@@ -18,6 +18,7 @@ extension Search {
 
     @NSManaged public var query: String?
     @NSManaged public var searchToMovies: NSSet?
+    @NSManaged public var searchToSortOrder: NSSet?
 
 }
 
@@ -35,6 +36,23 @@ extension Search {
 
     @objc(removeSearchToMovies:)
     @NSManaged public func removeFromSearchToMovies(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for searchToSortOrder
+extension Search {
+
+    @objc(addSearchToSortOrderObject:)
+    @NSManaged public func addToSearchToSortOrder(_ value: SortOrder)
+
+    @objc(removeSearchToSortOrderObject:)
+    @NSManaged public func removeFromSearchToSortOrder(_ value: SortOrder)
+
+    @objc(addSearchToSortOrder:)
+    @NSManaged public func addToSearchToSortOrder(_ values: NSSet)
+
+    @objc(removeSearchToSortOrder:)
+    @NSManaged public func removeFromSearchToSortOrder(_ values: NSSet)
 
 }
 

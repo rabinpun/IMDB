@@ -21,18 +21,21 @@ extension Search: Fetchable,Creatable {
     
     var movies: [Movie] {
         guard let moviesSet = self.searchToMovies as? Set<Movie> else { return [] }
-        return moviesSet.sorted(by: { $0.updatedAt ?? Date() < $1.updatedAt ?? Date() })
-    }
-    
-    func setMovies(_ movies: [Movie]) {
-        self.searchToMovies = NSSet(set: Set(movies))
+        guard let sortOrderSet = self.searchToSortOrder as? Set<SortOrder> else { return [] }
+        return moviesSet.sorted { firstMovie, secondMovie in
+            let sortOrderFirstMovie = sortOrderSet.first(where: { $0.sortOrderToMovie == firstMovie })?.order
+            let sortOrderSecondMovie = sortOrderSet.first(where: { $0.sortOrderToMovie == secondMovie })?.order
+            return sortOrderFirstMovie ?? Date() < sortOrderSecondMovie ?? Date()
+        }
     }
     
     func addMovies(_ movies: [Movie]) {
-        if let moviesSet = searchToMovies as? Set<Movie> {
+        if let moviesSet = searchToMovies as? Set<Movie>, !moviesSet.isEmpty {
             /// add movies to the old movies
             let newMoviesSet = moviesSet.union(Set(movies))
             addToSearchToMovies(NSSet(set: newMoviesSet))
+        } else {
+            self.searchToMovies = NSSet(set: Set(movies))
         }
     }
     

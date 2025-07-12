@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B250E9772E22B38000565EDE /* SortOrder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B250E9762E22B38000565EDE /* SortOrder+CoreDataProperties.swift */; };
 		B250E9782E22B38000565EDE /* SortOrder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B250E9752E22B38000565EDE /* SortOrder+CoreDataClass.swift */; };
+		B250EA7A2E22D8DA00565EDE /* FlowStacks in Frameworks */ = {isa = PBXBuildFile; productRef = B250EA792E22D8DA00565EDE /* FlowStacks */; };
 		B28CEAB52E20ED8600F222AC /* Search+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28CEAB22E20ED8600F222AC /* Search+CoreDataClass.swift */; };
 		B28CEAB62E20ED8600F222AC /* Search+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28CEAB32E20ED8600F222AC /* Search+CoreDataProperties.swift */; };
 		B28CEABA2E20FC3100F222AC /* Movie+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28CEAB82E20FC3100F222AC /* Movie+CoreDataClass.swift */; };
@@ -67,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B250EA7A2E22D8DA00565EDE /* FlowStacks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +135,7 @@
 			);
 			name = IMDB;
 			packageProductDependencies = (
+				B250EA792E22D8DA00565EDE /* FlowStacks */,
 			);
 			productName = IMDB;
 			productReference = B264A2692E1F9C4200114549 /* IMDB.app */;
@@ -216,6 +219,9 @@
 			);
 			mainGroup = B264A2602E1F9C4200114549;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				B250EA782E22D8DA00565EDE /* XCRemoteSwiftPackageReference "FlowStacks" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B264A26A2E1F9C4200114549 /* Products */;
 			projectDirPath = "";
@@ -620,6 +626,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B250EA782E22D8DA00565EDE /* XCRemoteSwiftPackageReference "FlowStacks" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnpatrickmorgan/FlowStacks.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B250EA792E22D8DA00565EDE /* FlowStacks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B250EA782E22D8DA00565EDE /* XCRemoteSwiftPackageReference "FlowStacks" */;
+			productName = FlowStacks;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B264A2612E1F9C4200114549 /* Project object */;
 }

@@ -31,6 +31,10 @@ class DataStack: ObservableObject {
     
     private static func seedMockData(container: NSPersistentContainer) {
         let viewContext = container.viewContext
+        
+        let search = Search(context: viewContext)
+        search.query = "Star"
+        
         for i in 0..<10 {
             let movie = Movie(context: viewContext)
             movie.id = Int32(i)
@@ -39,7 +43,9 @@ class DataStack: ObservableObject {
             movie.releaseDate = Date()
             movie.posterImagePath = i % 2 == 0 ? "3SyJUsCH39jAWE5fB0EAV1c88cs.jpg" : nil
             movie.updatedAt = Date()
+            search.addToSearchToMovies(movie)
         }
+        
         do {
             try viewContext.save()
         } catch {

@@ -55,5 +55,5 @@ struct HomeScreen: View {
 }
 
 #Preview {
-    HomeScreen(viewModel: HomeViewModel(context: DataStack.preview.container.viewContext))
+    HomeScreen(viewModel: HomeViewModel(apiService: MockAPIService(), context: DataStack.preview.container.viewContext))
 }

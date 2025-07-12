@@ -19,4 +19,24 @@ extension Movie: Fetchable,Creatable {
         return NSFetchRequest(entityName: Item.entityName)
     }
     
+    static let dummyMovie: Movie = {
+        let movie = Movie(context: DataStack.preview.container.viewContext)
+        movie.id = 1
+        movie.title = "Dummy Movie"
+        movie.releaseDate = Date()
+        movie.posterImagePath = "dummy"
+        movie.overview = "Dummy Overview"
+        movie.updatedAt = Date()
+        return movie
+    }()
+    
+    func update(with movie: MovieResponse) {
+        id = Int32(movie.id)
+        title = movie.title
+        releaseDate = movie.release_date?.toDate ?? Date()
+        posterImagePath = movie.poster_path
+        overview = movie.overview
+        updatedAt = Date()
+    }
+    
 }

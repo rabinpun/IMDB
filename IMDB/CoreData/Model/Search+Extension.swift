@@ -24,4 +24,16 @@ extension Search: Fetchable,Creatable {
         return moviesSet.sorted(by: { $0.updatedAt ?? Date() < $1.updatedAt ?? Date() })
     }
     
+    func setMovies(_ movies: [Movie]) {
+        self.searchToMovies = NSSet(set: Set(movies))
+    }
+    
+    func addMovies(_ movies: [Movie]) {
+        if let moviesSet = searchToMovies as? Set<Movie> {
+            /// add movies to the old movies
+            let newMoviesSet = moviesSet.union(Set(movies))
+            addToSearchToMovies(NSSet(set: newMoviesSet))
+        }
+    }
+    
 }

@@ -13,7 +13,7 @@ struct IMDBApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeScreen()
+            HomeScreen(viewModel: HomeViewModel(context: dataStack.container.viewContext))
                 .environment(\.managedObjectContext, dataStack.container.viewContext)
         }
     }

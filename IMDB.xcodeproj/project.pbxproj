@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B250E9772E22B38000565EDE /* SortOrder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B250E9762E22B38000565EDE /* SortOrder+CoreDataProperties.swift */; };
+		B250E9782E22B38000565EDE /* SortOrder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B250E9752E22B38000565EDE /* SortOrder+CoreDataClass.swift */; };
 		B28CEAB52E20ED8600F222AC /* Search+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28CEAB22E20ED8600F222AC /* Search+CoreDataClass.swift */; };
 		B28CEAB62E20ED8600F222AC /* Search+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28CEAB32E20ED8600F222AC /* Search+CoreDataProperties.swift */; };
 		B28CEABA2E20FC3100F222AC /* Movie+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B28CEAB82E20FC3100F222AC /* Movie+CoreDataClass.swift */; };
@@ -31,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B250E9752E22B38000565EDE /* SortOrder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SortOrder+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B250E9762E22B38000565EDE /* SortOrder+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SortOrder+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B264A2692E1F9C4200114549 /* IMDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IMDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B264A27C2E1F9C4300114549 /* IMDBTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IMDBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B264A2862E1F9C4300114549 /* IMDBUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IMDBUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +90,8 @@
 		B264A2602E1F9C4200114549 = {
 			isa = PBXGroup;
 			children = (
+				B250E9752E22B38000565EDE /* SortOrder+CoreDataClass.swift */,
+				B250E9762E22B38000565EDE /* SortOrder+CoreDataProperties.swift */,
 				B28CEAB82E20FC3100F222AC /* Movie+CoreDataClass.swift */,
 				B28CEAB92E20FC3100F222AC /* Movie+CoreDataProperties.swift */,
 				B28CEAB22E20ED8600F222AC /* Search+CoreDataClass.swift */,
@@ -255,6 +261,8 @@
 				B28CEAB62E20ED8600F222AC /* Search+CoreDataProperties.swift in Sources */,
 				B28CEABA2E20FC3100F222AC /* Movie+CoreDataClass.swift in Sources */,
 				B28CEABB2E20FC3100F222AC /* Movie+CoreDataProperties.swift in Sources */,
+				B250E9772E22B38000565EDE /* SortOrder+CoreDataProperties.swift in Sources */,
+				B250E9782E22B38000565EDE /* SortOrder+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

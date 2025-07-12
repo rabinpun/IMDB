@@ -12,6 +12,7 @@ enum APIEndpoint {
     static let paginationSize = 20 // pagination size of the api response for list results. seems to be static for some reason.
     
     var baseURL: String { "https://api.themoviedb.org/3" }
+    
     case search
 
     var urlString: String {
@@ -24,6 +25,12 @@ enum APIEndpoint {
     var httpMethod: String {
             switch self {
             case .search: return "GET"
+        }
+    }
+    
+    var requiresAuthorization: Bool {
+        switch self {
+        case .search: return true
         }
     }
 }

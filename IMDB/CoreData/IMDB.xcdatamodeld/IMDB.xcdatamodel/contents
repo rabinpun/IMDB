@@ -7,10 +7,10 @@
         <attribute name="releaseDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="updatedAt" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="search" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Search" inverseName="movies" inverseEntity="Search"/>
+        <relationship name="movieToSearch" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Search" inverseName="searchToMovies" inverseEntity="Search"/>
     </entity>
     <entity name="Search" representedClassName="Search" syncable="YES">
         <attribute name="query" optional="YES" attributeType="String"/>
-        <relationship name="movies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Movie" inverseName="search" inverseEntity="Movie"/>
+        <relationship name="searchToMovies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Movie" inverseName="movieToSearch" inverseEntity="Movie"/>
     </entity>
 </model>

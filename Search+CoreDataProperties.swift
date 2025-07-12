@@ -2,7 +2,7 @@
 //  Search+CoreDataProperties.swift
 //  IMDB
 //
-//  Created by Rabin Pun on 11/07/2025.
+//  Created by Rabin Pun on 12/07/2025.
 //
 //
 
@@ -17,24 +17,24 @@ extension Search {
     }
 
     @NSManaged public var query: String?
-    @NSManaged public var movies: NSSet?
+    @NSManaged public var searchToMovies: NSSet?
 
 }
 
-// MARK: Generated accessors for movies
+// MARK: Generated accessors for searchToMovies
 extension Search {
 
-    @objc(addMoviesObject:)
-    @NSManaged public func addToMovies(_ value: Movie)
+    @objc(addSearchToMoviesObject:)
+    @NSManaged public func addToSearchToMovies(_ value: Movie)
 
-    @objc(removeMoviesObject:)
-    @NSManaged public func removeFromMovies(_ value: Movie)
+    @objc(removeSearchToMoviesObject:)
+    @NSManaged public func removeFromSearchToMovies(_ value: Movie)
 
-    @objc(addMovies:)
-    @NSManaged public func addToMovies(_ values: NSSet)
+    @objc(addSearchToMovies:)
+    @NSManaged public func addToSearchToMovies(_ values: NSSet)
 
-    @objc(removeMovies:)
-    @NSManaged public func removeFromMovies(_ values: NSSet)
+    @objc(removeSearchToMovies:)
+    @NSManaged public func removeFromSearchToMovies(_ values: NSSet)
 
 }
 

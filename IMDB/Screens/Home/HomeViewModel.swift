@@ -14,7 +14,8 @@ class HomeViewModel: ObservableObject {
     var cancellables = Set<AnyCancellable>()
     @Published var state: State = .initial
     @Published var searchText = ""
-    @Published var error: Error?
+    @Published var error: AppError?
+    @Published var pagination: Pagination = .init(page: 0, totalPages: 0)
     
     let context: NSManagedObjectContext
     let apiService: APIService
@@ -42,20 +43,26 @@ class HomeViewModel: ObservableObject {
     /// - Parameter searchText: search query text
     /// - Parameter refresh: force refresh the fetch
     func searchMovies(searchText: String, refresh: Bool = false) async {
-        guard !searchText.isEmpty, !state.isFetching, (state.canFetchNextPage || refresh) else { return }
-        let nextPageNumber = refresh ? "1" : state.nextPageNumber
+        guard !searchText.isEmpty, !state.isFetching, (pagination.canFetchNextPage || refresh) else { return }
+       
         await MainActor.run {
-            self.state = .fetching
+            if refresh {
+                pagination = .init(page: 0, totalPages: 1)
+            }
+            state = .fetching
         }
         do {
-            let searchMoviesResponse: SearchMoviesResponse = try await apiService.fetch(APIRequest(endPoint: .search, parameters: SearchMovieParameter(query: searchText, page: nextPageNumber)))
+            let searchMoviesResponse: SearchMoviesResponse = try await apiService.fetch(APIRequest(endPoint: .search, parameters: SearchMovieParameter(query: searchText, page: pagination.nextPage)))
             await MainActor.run {
                 self.state = .data(searchMoviesResponse)
+                self.pagination = .init(page: searchMoviesResponse.page, totalPages: searchMoviesResponse.total_pages)
                 self.addMoviesToDB(moviesResponse: searchMoviesResponse.results, refresh: refresh)
             }
         } catch {
             await MainActor.run {
-                self.error = error
+                let appError = AppError(message: error.localizedDescription)
+                self.state = .error(appError)
+                self.error = appError
             }
         }
     }
@@ -106,7 +113,7 @@ class HomeViewModel: ObservableObject {
     ///   - movie: Current movie
     /// - Returns: Returs if the movie is at the bottom section of the movie list
     func hasReachedToBottom(movies: [Movie], movie: Movie) -> Bool {
-        guard movies.count >= APIEndpoint.paginationSize else { return false }
+        guard movies.count >= Pagination.size else { return false }
         let fetchThreshold = 7 // 7 so that the user doesnt need to scroll to the very bottom to load next page
         return movies[movies.count - fetchThreshold..<movies.count].map({ $0.id }).contains(movie.id)
     }

@@ -9,7 +9,7 @@ import Foundation
 
 extension HomeViewModel {
     enum State {
-        case initial, fetching, data(SearchMoviesResponse)
+        case initial, fetching, data(SearchMoviesResponse), error(AppError)
         
         var isFetching: Bool {
             switch self {
@@ -18,25 +18,16 @@ extension HomeViewModel {
             }
         }
         
-        var nextPageNumber: String {
-            switch self {
-            case .data(let response):
-                return String(response.page.advanced(by: 1))
-            default:
-                return "1"
-            }
-        }
-        
-        var canFetchNextPage: Bool {
-            switch self {
-            case .data(let response): return response.page < response.total_pages
-            default: return true
-            }
-        }
-        
-        var noData: Bool {
+        var hasNoData: Bool {
             switch self {
             case .data(let response): return response.page == 1 && response.results.isEmpty
+            default: return false
+            }
+        }
+        
+        var hasError: Bool {
+            switch self {
+            case .error: return true
             default: return false
             }
         }

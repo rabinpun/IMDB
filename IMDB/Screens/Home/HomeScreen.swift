@@ -22,6 +22,7 @@ struct HomeScreen: View {
                 .navigationTitle("IMDB")
             }
             .searchable(text: $viewModel.searchText, prompt: "Search movies...")
+            .errorAlert(error: $viewModel.error)
     }
     
     @ViewBuilder
@@ -41,10 +42,10 @@ struct HomeScreen: View {
             }
             .overlay(
                 Group {
-                    if (searchs.first?.movies ?? []).isEmpty {
-                        if viewModel.state.noData {
+                    if (searchs.first?.movies ?? []).isEmpty, !viewModel.searchText.isEmpty {
+                        if viewModel.state.hasNoData {
                             Text("Oops, No results found.")
-                        } else if !viewModel.searchText.isEmpty {
+                        } else if !viewModel.state.hasError {
                             ProgressView()
                         }
                     }

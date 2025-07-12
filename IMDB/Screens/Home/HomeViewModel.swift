@@ -58,10 +58,16 @@ class HomeViewModel: ObservableObject {
                 self.pagination = .init(page: searchMoviesResponse.page, totalPages: searchMoviesResponse.total_pages)
                 self.addMoviesToDB(moviesResponse: searchMoviesResponse.results, refresh: refresh)
             }
-        } catch {
+        } catch (let error) {
             await MainActor.run {
                 let appError = AppError(message: error.localizedDescription)
                 self.state = .error(appError)
+                
+                // ignore the no internet connection error
+                guard let urlError = error as? URLError, urlError.code != .notConnectedToInternet  else { return }
+                
+                // ignore the cancelled error
+                guard (error as NSError).code != -999  else { return }
                 self.error = appError
             }
         }

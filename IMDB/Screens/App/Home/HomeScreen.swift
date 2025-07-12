@@ -7,10 +7,12 @@
 
 import SwiftUI
 import CoreData
+import FlowStacks
 
 struct HomeScreen: View {
 
     @StateObject var viewModel: HomeViewModel
+    @EnvironmentObject var navigator: FlowNavigator<AppCoordinator.Screen>
     
     init(viewModel: HomeViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -32,6 +34,9 @@ struct HomeScreen: View {
                 if let movies = searchs.first?.movies {
                     ForEach(movies) { movie in
                        MovieListRow(movie: movie)
+                            .onTapGesture {
+                                navigator.push(.details(movie))
+                            }
                         .task {
                             if viewModel.hasReachedToBottom(movies: movies, movie: movie) {
                                 await viewModel.fetchNextPage()

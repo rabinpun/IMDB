@@ -84,21 +84,37 @@ class HomeViewModel: ObservableObject {
     ///   - moviesResponse: List of movie response from api
     ///   - refresh:If true resets the movies to this list instead of adding to previous list
     func addMoviesToDB(moviesResponse: [MovieResponse], refresh: Bool) {
-        let movies = moviesResponse.map { movieResponse in
-            let movie: Movie = findOrCreateItem(predicate: NSPredicate(format: "id == %d", movieResponse.id))
-            movie.update(with: movieResponse)
-            return movie
+        
+        if refresh {
+            // deleting the old search entity
+            let searchFetchRequest = Search.fetch()
+            searchFetchRequest.predicate = NSPredicate(format: "query == %@", searchText)
+            if let search: Search = try? context.fetch(searchFetchRequest).first {
+                context.delete(search)
+                try? context.save()
+            }
         }
         
+        // creating find or create new search enity if not present
         let search: Search = findOrCreateItem(predicate: NSPredicate(format: "query == %@", searchText))
         search.query = searchText
         
-        // Set the movies to the search entity if refresh reset the movies else update the existing list
-        if refresh {
-            search.setMovies(movies)
-        } else {
-            search.addMovies(movies)
+        let movies = moviesResponse.map { movieResponse in
+            // create movie entity
+            let movie: Movie = findOrCreateItem(predicate: NSPredicate(format: "id == %d", movieResponse.id))
+            movie.update(with: movieResponse)
+            
+            // create sort order entity
+            let sortOrder: SortOrder = findOrCreateItem(predicate: NSPredicate(format: "sortOrderToMovie.id == %d && sortOrderToSearch.query == %@", movie.id, searchText))
+            sortOrder.order = Date()
+            sortOrder.sortOrderToMovie = movie // set movie
+            sortOrder.sortOrderToSearch = search // set search
+
+            return movie
         }
+        
+        // set movies to search
+        search.addMovies(movies)
         
         try? context.save()
     }

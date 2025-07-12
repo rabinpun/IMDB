@@ -32,8 +32,10 @@ class HomeViewModel: ObservableObject {
         $searchText
             .debounce(for: 1, scheduler: DispatchQueue.main) // Debounce of 1 sec so to reduce the excessive network call on each character change
             .sink(receiveValue: { [weak self] searchText in
-                Task {
-                    await self?.searchMovies(searchText: searchText,refresh: true) // refresh true to refresh the movies list is fetched from page 1
+                if NetworkMonitor.shared.isConnected() {
+                    Task {
+                        await self?.searchMovies(searchText: searchText,refresh: true) // refresh true to refresh the movies list is fetched from page 1
+                    }
                 }
             })
             .store(in: &cancellables)

@@ -15,10 +15,6 @@ extension Movie: Fetchable,Creatable {
         return Self(context: context)
     }
     
-    class func getFetchRequest() -> NSFetchRequest<Item> {
-        return NSFetchRequest(entityName: Item.entityName)
-    }
-    
     func update(with movie: MovieResponse) {
         id = Int32(movie.id)
         title = movie.title

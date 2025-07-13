@@ -2,7 +2,7 @@
 //  Movie+CoreDataProperties.swift
 //  IMDB
 //
-//  Created by Rabin Pun on 12/07/2025.
+//  Created by Rabin Pun on 13/07/2025.
 //
 //
 
@@ -21,7 +21,7 @@ extension Movie {
     @NSManaged public var posterImagePath: String?
     @NSManaged public var releaseDate: Date?
     @NSManaged public var title: String?
-    @NSManaged public var updatedAt: Date?
+    @NSManaged public var isFavorite: Bool
     @NSManaged public var movieToSearch: NSSet?
     @NSManaged public var movieToSortOrder: NSSet?
 

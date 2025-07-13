@@ -9,15 +9,13 @@ import Foundation
 
 enum APIEndpoint {
     
-    var baseURL: String { "https://api.themoviedb.org/3" }
-    
     case search
     
     /// full url path for the given end pont
     var urlString: String {
         switch self {
         case .search:
-            return "\(baseURL)/search/movie"
+            return "\(Constants.baseURL)/search/movie"
         }
     }
     

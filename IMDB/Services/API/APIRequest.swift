@@ -46,7 +46,7 @@ struct APIRequest {
         urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
         
         if (endPoint.requiresAuthorization) {
-            urlRequest.setValue(Constants.accessToken, forHTTPHeaderField: "Authorization")
+            urlRequest.setValue("Bearer " + Constants.accessToken, forHTTPHeaderField: "Authorization")
         }
         
         return urlRequest

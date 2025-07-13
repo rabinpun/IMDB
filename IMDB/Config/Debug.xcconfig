@@ -1,0 +1,14 @@
+//
+//  Debug.xcconfig
+//  IMDB
+//
+//  Created by Rabin Pun on 13/07/2025.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+API_BASE_URL = https:/$()/api.themoviedb.org/3
+IMAGE_BASE_URL = https:/$()/image.tmdb.org/t/p
+ACCESS_TOKEN = eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYzE5NDlmYmExNzk4NjVjYzAzZWE1YmFmNTcwNTkyMSIsIm5iZiI6MTc1MjE2NTg0Ny4zMzMsInN1YiI6IjY4NmZlZGQ3NDhlNzY2NTgxNDlhNTU1YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FlRbN6F_cxB1NS3lK03G0lPHEk3T-gP9l4XMYc8cr1s
+

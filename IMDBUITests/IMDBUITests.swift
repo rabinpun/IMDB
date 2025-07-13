@@ -8,34 +8,72 @@
 import XCTest
 
 final class IMDBUITests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
+    
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func test_homeScreen_initialState_searchBarHasPlaceholderAndListIsEmpty() throws {
         let app = XCUIApplication()
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let searchField = app.searchFields.firstMatch
+        let listRows = app.collectionViews.buttons
+        let progressView = app.activityIndicators["1"]
+        let noDataFoundLabel = app.staticTexts["Oops, No results found."]
+        XCTAssertEqual(searchField.value as? String, "Search movies...", "The search field has placeholder.")
+        XCTAssertEqual(listRows.count, 0, "The list should be empty.")
+        XCTAssertFalse(progressView.exists, "The progressview should be not be visible.")
+        XCTAssertFalse(noDataFoundLabel.exists, "No results found label should not be visible.")
     }
-
+    
     @MainActor
-    func testLaunchPerformance() throws {
-        // This measures how long it takes to launch your application.
-        measure(metrics: [XCTApplicationLaunchMetric()]) {
-            XCUIApplication().launch()
-        }
+    func test_homeScreen_whenSearchingStar_searchBarIsNotEmptyAndListIsNotEmpty() throws {
+        let app = XCUIApplication()
+        app.launch()
+        let searchField = app.searchFields.firstMatch
+        searchField.tap()
+        searchField.typeText("Star")
+        
+        let listRows = app.collectionViews.buttons
+        let noDataFoundLabel = app.staticTexts["Oops, No results found."]
+        XCTAssertEqual(searchField.value as? String, "Star", "The search field has placeholder.")
+        XCTAssertFalse(noDataFoundLabel.exists, "No results found label should not be visible.")
+        
+        let exists = NSPredicate(format: "count > 0")
+        expectation(for: exists, evaluatedWith: listRows, handler: nil)
+        waitForExpectations(timeout: 5)
+        XCTAssertGreaterThan(listRows.count, 0, "The list should be empty.")
+    }
+    
+    @MainActor
+    func test_homeScreen_onRightNavigationBarItem_showsFavoritesScreen() throws {
+        let app = XCUIApplication()
+        app.launch()
+        let favoriteButton = app.buttons["Favorite"]
+        favoriteButton.tap()
+        
+        XCTAssertTrue(app.staticTexts["Favourites"].exists, "Shows favorites screen")
+        
+        let backButton = app.buttons["Back"]
+        backButton.tap()
+        
+        XCTAssertTrue(app.staticTexts["IMDB"].exists, "Shows home screen")
+    }
+    
+    @MainActor
+    func test_homeScreen_onTapOnRow_showsDetailsScreen() throws {
+        let app = XCUIApplication()
+        app.launch()
+        let searchField = app.searchFields.firstMatch
+        searchField.tap()
+        searchField.typeText("Star")
+        
+        let listRowButtons = app.collectionViews.buttons
+        
+        let exists = NSPredicate(format: "count > 0")
+        expectation(for: exists, evaluatedWith: listRowButtons, handler: nil)
+        waitForExpectations(timeout: 5)
+        
+        listRowButtons.firstMatch.tap()
+        
+        XCTAssertTrue(app.staticTexts["Movie Details"].exists, "Shows details screen")
     }
 }

@@ -20,17 +20,11 @@ final class HomeViewModelUnitTests: XCTestCase {
 
     override func setUpWithError() throws {
         apiService = MockAPIService()
-        context = DataStack.preview.container.viewContext
+        context = DataStack(inMemory: true).container.viewContext
         sut = HomeViewModel(apiService: apiService, context: context)
     }
 
     override func tearDownWithError() throws {
-        let fetchRequest = Search.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "query == %@", searchQuery)
-        if let newSearch = try context.fetch(fetchRequest).first {
-            context.delete(newSearch)
-            try? context.save()
-        }
         apiService = nil
         context = nil
         sut = nil
@@ -140,20 +134,16 @@ final class HomeViewModelUnitTests: XCTestCase {
     }
     
     func test_findOrCreateItem_whenFetchingExistingItem_returnsExistingItem() async throws {
-        let searchFetchRequest = Search.fetchRequest()
-        searchFetchRequest.predicate = NSPredicate(format: "query == %@", "Star")
-        let searchFetchResult = try context.fetch(searchFetchRequest).first
-        
-        let movieFetchRequest = Movie.fetchRequest()
-        movieFetchRequest.predicate = NSPredicate(format: "id == %d", 1)
-        let movieFetchResult = try context.fetch(movieFetchRequest).first
-        
-        
         let search: Search = sut.findOrCreateItem(predicate: NSPredicate(format: "query == %@", "Star"))
+        search.query = "Star"
         let movie: Movie = sut.findOrCreateItem(predicate: NSPredicate(format: "id == %d", 1))
+        movie.id = 1
         
-        XCTAssertEqual(searchFetchResult, search)
-        XCTAssertEqual(movieFetchResult, movie)
+        let newSearch: Search = sut.findOrCreateItem(predicate: NSPredicate(format: "query == %@", "Star"))
+        let newMovie: Movie = sut.findOrCreateItem(predicate: NSPredicate(format: "id == %d", 1))
+        
+        XCTAssertEqual(newSearch, search)
+        XCTAssertEqual(newMovie, movie)
     }
     
     func test_findOrCreateItem_whenFetchingNonExistingItem_returnsNewItem() async throws {

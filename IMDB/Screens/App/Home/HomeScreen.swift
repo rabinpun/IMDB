@@ -33,6 +33,7 @@ struct HomeScreen: View {
                     .searchable(text: $viewModel.searchText, prompt: "Search movies...")
             }
             .errorAlert(error: $viewModel.error)
+            .onAppear(perform: viewModel.observeEvents)
     }
     
     @ViewBuilder

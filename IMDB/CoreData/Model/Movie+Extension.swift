@@ -26,7 +26,6 @@ extension Movie: Fetchable,Creatable {
         movie.releaseDate = Date()
         movie.posterImagePath = "dummy"
         movie.overview = "Dummy Overview"
-        movie.updatedAt = Date()
         return movie
     }()
     
@@ -36,7 +35,6 @@ extension Movie: Fetchable,Creatable {
         releaseDate = movie.release_date?.toDate ?? Date()
         posterImagePath = movie.poster_path
         overview = movie.overview
-        updatedAt = Date()
     }
     
 }

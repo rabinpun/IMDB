@@ -15,7 +15,7 @@ extension SortOrder: Fetchable,Creatable {
         return Self(context: context)
     }
     
-    class func fetch() -> NSFetchRequest<Item> {
+    class func getFetchRequest() -> NSFetchRequest<Item> {
         return NSFetchRequest(entityName: Item.entityName)
     }
     

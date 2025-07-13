@@ -23,12 +23,15 @@ class DataStack: ObservableObject {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
+    /// Data stack for the preview
     static let preview: DataStack = {
         let dataStack = DataStack(inMemory: true)
         seedMockData(container: dataStack.container)
         return dataStack
     }()
     
+    /// Add mock data to the persistent container's context
+    /// - Parameter container: Persistent container
     private static func seedMockData(container: NSPersistentContainer) {
         let viewContext = container.viewContext
         

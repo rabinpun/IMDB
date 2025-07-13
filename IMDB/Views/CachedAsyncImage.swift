@@ -21,6 +21,7 @@ extension CachedAsyncImage {
     }
 }
 
+/// Image that caches the remote images
 struct CachedAsyncImage: View {
     private let url: URL?
     @State private var state: LoadingState = .initial

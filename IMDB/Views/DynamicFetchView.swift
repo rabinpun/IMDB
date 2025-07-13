@@ -8,6 +8,7 @@
 import CoreData
 import SwiftUI
 
+/// FetchVIew that rebuild the child view when predicate changes
 struct DynamicFetchView<T: NSManagedObject, Content: View>: View {
     let fetchRequest: FetchRequest<T>
     let content: (FetchedResults<T>) -> Content

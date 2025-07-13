@@ -23,12 +23,9 @@ class HomeViewModel: ObservableObject {
     init(apiService: APIService = IAPIService(), context: NSManagedObjectContext) {
         self.apiService = apiService
         self.context = context
-        
-        /// observe the events like searchText update
-        observeEvents()
     }
     
-    private func observeEvents() {
+    func observeEvents() {
         $searchText
             .debounce(for: 1, scheduler: DispatchQueue.main) // Debounce of 1 sec so to reduce the excessive network call on each character change
             .sink(receiveValue: { [weak self] searchText in

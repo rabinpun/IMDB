@@ -18,11 +18,11 @@ extension String {
     
     /// Image path for the details screen with higher resolution
     var originalImagePath: String {
-        return "https://image.tmdb.org/t/p/original\(self)"
+        return "\(Constants.imageBaseURL)/original/\(self)"
     }
     
     /// Image path for the list row with lower resolution
     var thumbnailImagePath: String {
-        return "https://image.tmdb.org/t/p/w200\(self)"
+        return "\(Constants.imageBaseURL)/w200/\(self)"
     }
 }

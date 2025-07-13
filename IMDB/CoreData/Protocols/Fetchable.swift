@@ -12,5 +12,5 @@ protocol Fetchable {
     associatedtype Item: NSManagedObject
     /// Get fetch request of the associated item
     /// - Returns: Return fetch request
-    static func getFetchRequest() -> NSFetchRequest<Item>
+    static func fetchRequest() -> NSFetchRequest<Item>
 }

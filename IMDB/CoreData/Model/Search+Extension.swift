@@ -15,10 +15,6 @@ extension Search: Fetchable,Creatable {
         return Self(context: context)
     }
     
-    class func getFetchRequest() -> NSFetchRequest<Item> {
-        return NSFetchRequest(entityName: Item.entityName)
-    }
-    
     var movies: [Movie] {
         guard let moviesSet = self.searchToMovies as? Set<Movie> else { return [] }
         guard let sortOrderSet = self.searchToSortOrder as? Set<SortOrder> else { return [] }

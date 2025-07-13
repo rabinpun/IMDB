@@ -13,6 +13,7 @@ struct MovieListRow: View {
     @Environment(\.managedObjectContext) var context
     @FetchRequest
     var movies: FetchedResults<Movie>
+    @State var error: AppError?
     
     var movie: Movie? {
         movies.first
@@ -35,6 +36,7 @@ struct MovieListRow: View {
                 toggleFavorite()
             }
         }
+        .errorAlert(error: $error)
     }
     
     @ViewBuilder
@@ -67,8 +69,12 @@ struct MovieListRow: View {
     }
     
     func toggleFavorite() {
-        movie?.isFavorite.toggle()
-        try? context.save()
+        do {
+            movie?.isFavorite.toggle()
+            try context.save()
+        } catch {
+            self.error = AppError(message: "Failed to save. Try again.")
+        }
     }
 }
 

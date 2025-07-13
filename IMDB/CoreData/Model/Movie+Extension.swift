@@ -24,7 +24,7 @@ extension Movie: Fetchable,Creatable {
         movie.id = 1
         movie.title = "Dummy Movie"
         movie.releaseDate = Date()
-        movie.posterImagePath = "dummy"
+        movie.posterImagePath = "3SyJUsCH39jAWE5fB0EAV1c88cs.jpg"
         movie.overview = "Dummy Overview"
         return movie
     }()

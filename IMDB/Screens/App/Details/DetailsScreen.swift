@@ -84,5 +84,8 @@ struct DetailsScreen: View {
 }
 
 #Preview {
-    DetailsScreen(id: Movie.dummyMovie.id)
+    NavigationStack {
+        DetailsScreen(id: 2)
+            .environment(\.managedObjectContext, DataStack.preview.container.viewContext)
+    }
 }

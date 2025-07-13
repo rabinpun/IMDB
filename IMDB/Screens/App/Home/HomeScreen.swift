@@ -21,9 +21,17 @@ struct HomeScreen: View {
     var body: some View {
             NavigationStack {
                 moviesList()
-                .navigationTitle("IMDB")
+                    .navigationTitle("IMDB")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar(content: {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            StarButton(isFavorite: true) {
+                                navigator.push(.favorites)
+                            }
+                        }
+                    })
+                    .searchable(text: $viewModel.searchText, prompt: "Search movies...")
             }
-            .searchable(text: $viewModel.searchText, prompt: "Search movies...")
             .errorAlert(error: $viewModel.error)
     }
     
@@ -62,5 +70,8 @@ struct HomeScreen: View {
 }
 
 #Preview {
-    HomeScreen(viewModel: HomeViewModel(apiService: MockAPIService(), context: DataStack.preview.container.viewContext))
+    NavigationView {
+        HomeScreen(viewModel: HomeViewModel(apiService: MockAPIService(), context: DataStack.preview.container.viewContext))
+        
+    }
 }

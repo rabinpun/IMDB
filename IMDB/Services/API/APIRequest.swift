@@ -18,7 +18,9 @@ struct APIRequest {
         self.parameters = parameters
     }
     
-    func makeURLRequest() throws -> URLRequest {
+    /// Makes the required url request based on the end point, parameter and body
+    /// - Returns: Returns the configured URLRequest
+    func getURLRequest() throws -> URLRequest {
         var urlComponents = URLComponents(string: endPoint.urlString)!
 
         /// Add the query parameters to the URL.

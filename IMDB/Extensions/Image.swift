@@ -13,8 +13,8 @@ extension Image {
         Image(systemName: "photo")
     }
     
-    static var chevronRight: Image {
-        Image(systemName: "chevron.right")
+    static var chevronLeft: Image {
+        Image(systemName: "chevron.left")
     }
     
     static func star(isFavorite: Bool) -> Image {

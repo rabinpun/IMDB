@@ -25,37 +25,42 @@ struct DetailsScreen: View {
     
     var body: some View {
         ScrollView {
-               VStack(alignment: .leading, spacing: 16) {
+           VStack(alignment: .leading, spacing: 16) {
 
-                   // Poster
-                   posterImage()
-                   
-                   // Title
-                   Text(movie?.title ?? "")
-                       .font(.title)
-                       .fontWeight(.bold)
+               // Poster
+               posterImage()
+               
+               // Title
+               Text(movie?.title ?? "")
+                   .font(.title)
+                   .fontWeight(.bold)
 
-                   // Release Date
-                   Text("Release Date: \(movie?.releaseDate?.formattedDate ?? "Unavailable")")
-                       .font(.subheadline)
-                       .foregroundColor(.secondary)
+               // Release Date
+               Text("Release Date: \(movie?.releaseDate?.formattedDate ?? "Unavailable")")
+                   .font(.subheadline)
+                   .foregroundColor(.secondary)
 
-                   // Overview
-                   Text(movie?.overview ?? "")
-                       .font(.body)
-                       .multilineTextAlignment(.leading)
+               // Overview
+               Text(movie?.overview ?? "")
+                   .font(.body)
+                   .multilineTextAlignment(.leading)
 
-                   Spacer()
-               }
-               .padding()
+               Spacer()
+           }
+           .padding()
            }
            .navigationTitle("Movie Details")
            .navigationBarTitleDisplayMode(.inline)
+           .navigationBarBackButtonHidden()
            .toolbar(content: {
                ToolbarItem(placement: .topBarTrailing) {
                    StarButton(isFavorite: movie?.isFavorite) {
                        toggleFavorite()
                    }
+               }
+               
+               ToolbarItem(placement: .topBarLeading) {
+                   BackButton()
                }
            })
     }

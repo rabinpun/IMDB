@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "368E793E-0124-44B7-A7B5-87B55E92D424",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:IMDB.xcodeproj",
+      "identifier" : "B264A2682E1F9C4200114549",
+      "name" : "IMDB"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:IMDB.xcodeproj",
+        "identifier" : "B264A27B2E1F9C4300114549",
+        "name" : "IMDBTests"
+      }
+    }
+  ],
+  "version" : 1
+}

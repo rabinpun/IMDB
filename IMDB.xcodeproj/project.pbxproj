@@ -34,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B2313A792E23929F0074C77C /* IMDB.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = IMDB.xctestplan; sourceTree = "<group>"; };
 		B250E9752E22B38000565EDE /* SortOrder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SortOrder+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B250E9762E22B38000565EDE /* SortOrder+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SortOrder+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B264A2692E1F9C4200114549 /* IMDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IMDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +93,7 @@
 		B264A2602E1F9C4200114549 = {
 			isa = PBXGroup;
 			children = (
+				B2313A792E23929F0074C77C /* IMDB.xctestplan */,
 				B250E9752E22B38000565EDE /* SortOrder+CoreDataClass.swift */,
 				B250E9762E22B38000565EDE /* SortOrder+CoreDataProperties.swift */,
 				B28CEAB82E20FC3100F222AC /* Movie+CoreDataClass.swift */,
@@ -504,7 +506,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K7AB4TLJ34;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MACOSX_DEPLOYMENT_TARGET = 15.3;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rabinpun.IMDBTests;
@@ -527,7 +529,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K7AB4TLJ34;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MACOSX_DEPLOYMENT_TARGET = 15.3;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rabinpun.IMDBTests;
@@ -549,7 +551,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K7AB4TLJ34;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MACOSX_DEPLOYMENT_TARGET = 15.3;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rabinpun.IMDBUITests;
@@ -571,7 +573,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K7AB4TLJ34;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MACOSX_DEPLOYMENT_TARGET = 15.3;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rabinpun.IMDBUITests;

@@ -61,7 +61,7 @@ struct MovieListRow: View {
                 .lineLimit(2)
                 .foregroundColor(.primary)
             
-            Text("Released on: \(movie?.releaseDate?.formattedDate ?? "Unavailable")")
+            Text("Released on: \(movie?.releaseDate?.toFormattedString ?? "Unavailable")")
                 .foregroundColor(.secondary)
         }
     }

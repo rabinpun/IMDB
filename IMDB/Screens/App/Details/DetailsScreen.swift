@@ -36,7 +36,7 @@ struct DetailsScreen: View {
                    .fontWeight(.bold)
 
                // Release Date
-               Text("Release Date: \(movie?.releaseDate?.formattedDate ?? "Unavailable")")
+               Text("Release Date: \(movie?.releaseDate?.toFormattedString ?? "Unavailable")")
                    .font(.subheadline)
                    .foregroundColor(.secondary)
 

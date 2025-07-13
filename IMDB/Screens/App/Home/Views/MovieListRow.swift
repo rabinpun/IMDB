@@ -73,5 +73,6 @@ struct MovieListRow: View {
 }
 
 #Preview {
-    MovieListRow(id: Movie.dummyMovie.id)
+    MovieListRow(id: 1)
+        .environment(\.managedObjectContext, DataStack.preview.container.viewContext)
 }

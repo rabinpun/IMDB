@@ -42,6 +42,7 @@ class DataStack: ObservableObject {
             movie.overview = "Overview \(i)"
             movie.releaseDate = Date()
             movie.posterImagePath = i % 2 == 0 ? "3SyJUsCH39jAWE5fB0EAV1c88cs.jpg" : nil
+            movie.isFavorite = i % 2 == 0
             search.addToSearchToMovies(movie)
         }
         

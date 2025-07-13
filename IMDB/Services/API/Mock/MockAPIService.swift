@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Mock api service for testing and previews
 class MockAPIService: APIService {
     func fetch<T>(_ request: APIRequest) async throws -> T where T : Decodable {
         switch request.endPoint {

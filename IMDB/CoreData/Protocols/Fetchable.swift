@@ -10,5 +10,7 @@ import CoreData
 
 protocol Fetchable {
     associatedtype Item: NSManagedObject
-    static func fetch() -> NSFetchRequest<Item>
+    /// Get fetch request of the associated item
+    /// - Returns: Return fetch request
+    static func fetchRequest() -> NSFetchRequest<Item>
 }

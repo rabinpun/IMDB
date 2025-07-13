@@ -11,6 +11,7 @@ import FlowStacks
 extension AppCoordinator {
     enum Screen: Hashable {
       case details(Int32)
+        case favorites
     }
 }
 
@@ -25,6 +26,8 @@ struct AppCoordinator: View {
                     switch screen {
                     case .details(let id):
                         DetailsScreen(id: id)
+                    case .favorites:
+                        FavoritesScreen()
                     }
                 }
         }

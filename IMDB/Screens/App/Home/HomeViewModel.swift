@@ -87,7 +87,7 @@ class HomeViewModel: ObservableObject {
         
         if refresh {
             // deleting the old search entity
-            let searchFetchRequest = Search.fetch()
+            let searchFetchRequest = Search.fetchRequest()
             searchFetchRequest.predicate = NSPredicate(format: "query == %@", searchText)
             if let search: Search = try? context.fetch(searchFetchRequest).first {
                 context.delete(search)
@@ -123,7 +123,7 @@ class HomeViewModel: ObservableObject {
     /// - Parameter predicate: Perdicate to search the entity
     /// - Returns: Returns a found or newly created entity
     func findOrCreateItem<Entity: Fetchable & Creatable>(predicate: NSPredicate) -> Entity where Entity.Item == Entity {
-        let fetchRequest = Entity.fetch()
+        let fetchRequest = Entity.fetchRequest()
         fetchRequest.predicate = predicate
         guard let entity: Entity = try? context.fetch(fetchRequest).first else {
             return Entity.create(context: context)

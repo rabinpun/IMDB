@@ -14,7 +14,7 @@ protocol APIService {
 /// IAPIService: Here I stands for implementation
 class IAPIService: APIService {
     func fetch<T: Decodable >(_ request: APIRequest) async throws -> T {
-        let urlRequest = try request.makeURLRequest()
+        let urlRequest = try request.getURLRequest()
         
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         guard let statusCode = (response as? HTTPURLResponse)?.statusCode, (200...299).contains(statusCode) else {

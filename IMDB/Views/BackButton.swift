@@ -17,7 +17,7 @@ struct BackButton: View {
             navigator.goBack()
         } label: {
             Image.chevronLeft
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
         }
     }
 }

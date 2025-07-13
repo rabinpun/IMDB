@@ -10,6 +10,8 @@ import Foundation
 protocol DictionaryConvertible {}
 
 extension DictionaryConvertible {
+    /// Converts the conformance object to dictionary
+    /// - Returns: Return dictionary representation of object
     func toDict() -> [String:Any] {
         var dict = [String: Any]()
         let otherSelf = Mirror (reflecting: self)

@@ -13,6 +13,7 @@ struct MovieListRow: View {
     @Environment(\.managedObjectContext) var context
     @FetchRequest
     var movies: FetchedResults<Movie>
+    @State var error: AppError?
     
     var movie: Movie? {
         movies.first
@@ -35,6 +36,7 @@ struct MovieListRow: View {
                 toggleFavorite()
             }
         }
+        .errorAlert(error: $error)
     }
     
     @ViewBuilder
@@ -61,17 +63,22 @@ struct MovieListRow: View {
                 .lineLimit(2)
                 .foregroundColor(.primary)
             
-            Text("Released on: \(movie?.releaseDate?.formattedDate ?? "Unavailable")")
+            Text("Released on: \(movie?.releaseDate?.toFormattedString ?? "Unavailable")")
                 .foregroundColor(.secondary)
         }
     }
     
     func toggleFavorite() {
-        movie?.isFavorite.toggle()
-        try? context.save()
+        do {
+            movie?.isFavorite.toggle()
+            try context.save()
+        } catch {
+            self.error = AppError(message: "Failed to save. Try again.")
+        }
     }
 }
 
 #Preview {
-    MovieListRow(id: Movie.dummyMovie.id)
+    MovieListRow(id: 1)
+        .environment(\.managedObjectContext, DataStack.preview.container.viewContext)
 }

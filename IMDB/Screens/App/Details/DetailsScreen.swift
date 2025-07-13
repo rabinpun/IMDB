@@ -13,6 +13,7 @@ struct DetailsScreen: View {
     @Environment(\.managedObjectContext) var context
     @FetchRequest
     var movies: FetchedResults<Movie>
+    @State var error: AppError?
     
     var movie: Movie? {
         movies.first
@@ -36,7 +37,7 @@ struct DetailsScreen: View {
                    .fontWeight(.bold)
 
                // Release Date
-               Text("Release Date: \(movie?.releaseDate?.formattedDate ?? "Unavailable")")
+               Text("Release Date: \(movie?.releaseDate?.toFormattedString ?? "Unavailable")")
                    .font(.subheadline)
                    .foregroundColor(.secondary)
 
@@ -63,6 +64,7 @@ struct DetailsScreen: View {
                    BackButton()
                }
            })
+           .errorAlert(error: $error)
     }
     
     @ViewBuilder
@@ -78,11 +80,18 @@ struct DetailsScreen: View {
     }
     
     func toggleFavorite() {
-        movie?.isFavorite.toggle()
-        try? context.save()
+        do {
+            movie?.isFavorite.toggle()
+            try context.save()
+        } catch {
+            self.error = AppError(message: "Failed to save. Try again.")
+        }
     }
 }
 
 #Preview {
-    DetailsScreen(id: Movie.dummyMovie.id)
+    NavigationStack {
+        DetailsScreen(id: 2)
+            .environment(\.managedObjectContext, DataStack.preview.container.viewContext)
+    }
 }

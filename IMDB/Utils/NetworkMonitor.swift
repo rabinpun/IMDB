@@ -7,6 +7,7 @@
 
 import Network
 
+/// NetworkMonitor to get the current status of the network connection
 class NetworkMonitor {
     static let shared = NetworkMonitor()
     private let monitor = NWPathMonitor()

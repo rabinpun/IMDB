@@ -23,12 +23,15 @@ class DataStack: ObservableObject {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
+    /// Data stack for the preview
     static let preview: DataStack = {
         let dataStack = DataStack(inMemory: true)
         seedMockData(container: dataStack.container)
         return dataStack
     }()
     
+    /// Add mock data to the persistent container's context
+    /// - Parameter container: Persistent container
     private static func seedMockData(container: NSPersistentContainer) {
         let viewContext = container.viewContext
         
@@ -42,6 +45,7 @@ class DataStack: ObservableObject {
             movie.overview = "Overview \(i)"
             movie.releaseDate = Date()
             movie.posterImagePath = i % 2 == 0 ? "3SyJUsCH39jAWE5fB0EAV1c88cs.jpg" : nil
+            movie.isFavorite = i % 2 == 0
             search.addToSearchToMovies(movie)
         }
         

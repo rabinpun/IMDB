@@ -16,6 +16,8 @@ struct HomeScreen: View {
     
     init(viewModel: HomeViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        
+        print(Constants.baseURL)
     }
 
     var body: some View {

@@ -55,7 +55,7 @@ final class HomeViewModelUnitTests: XCTestCase {
         await sut.searchMovies(searchText: "sdsd", refresh: true)
         switch sut.state {
         case .error:
-            XCTAssertNotNil(sut.error)
+            XCTAssertNotNil(sut.error, "Error should not be nil")
         default :
             XCTFail("State should be .error")
         }
@@ -66,7 +66,7 @@ final class HomeViewModelUnitTests: XCTestCase {
         await sut.searchMovies(searchText: "sdsd", refresh: true)
         switch sut.state {
         case .error:
-            XCTAssertNil(sut.error)
+            XCTAssertNil(sut.error, "Error should be nil")
         default :
             XCTFail("State should be .error")
         }
@@ -77,7 +77,7 @@ final class HomeViewModelUnitTests: XCTestCase {
         await sut.searchMovies(searchText: "sdsd", refresh: true)
         switch sut.state {
         case .error:
-            XCTAssertNil(sut.error)
+            XCTAssertNil(sut.error, "Error should be nil")
         default :
             XCTFail("State should be .error")
         }
@@ -85,8 +85,8 @@ final class HomeViewModelUnitTests: XCTestCase {
     
     func test_searchMovies_whenNonEmptySearchText_updatesPaginationFromMockResponse() async throws {
         await sut.searchMovies(searchText: "ab", refresh: true)
-        XCTAssertEqual(sut.pagination.page, 1)
-        XCTAssertEqual(sut.pagination.totalPages, 2)
+        XCTAssertEqual(sut.pagination.page, 1, "Page should be 1")
+        XCTAssertEqual(sut.pagination.totalPages, 2, "Total page should be 2")
     }
     
     func test_addMovies_whenRefresh_resetsTheSearchEntity() async throws {
@@ -100,7 +100,7 @@ final class HomeViewModelUnitTests: XCTestCase {
             return movie
         }))
         try context.save()
-        XCTAssertEqual(search.movies.count, 3)
+        XCTAssertEqual(search.movies.count, 3, "Movies count should be 3")
         
         sut.addMoviesToDB(moviesResponse: moviesArrayTwo, refresh: true)
         
@@ -108,7 +108,7 @@ final class HomeViewModelUnitTests: XCTestCase {
         fetchRequest.predicate = NSPredicate(format: "query == %@", searchQuery)
         let newSearch = try context.fetch(fetchRequest).first
         
-        XCTAssertEqual(newSearch?.movies.count, 3)
+        XCTAssertEqual(newSearch?.movies.count, 3, "Movies count should be 3")
     }
     
     func test_addMovies_whenRefresh_updatesTheMoviesInSearchEntity() async throws {
@@ -122,7 +122,7 @@ final class HomeViewModelUnitTests: XCTestCase {
             return movie
         }))
         try context.save()
-        XCTAssertEqual(search.movies.count, 3)
+        XCTAssertEqual(search.movies.count, 3, "Movies count should be 3")
         
         sut.addMoviesToDB(moviesResponse: moviesArrayTwo, refresh: false)
         
@@ -130,7 +130,7 @@ final class HomeViewModelUnitTests: XCTestCase {
         fetchRequest.predicate = NSPredicate(format: "query == %@", searchQuery)
         let newSearch = try context.fetch(fetchRequest).first
         
-        XCTAssertEqual(newSearch?.movies.count, 6)
+        XCTAssertEqual(newSearch?.movies.count, 6, "Movies count should be 6")
     }
     
     func test_findOrCreateItem_whenFetchingExistingItem_returnsExistingItem() async throws {
@@ -142,8 +142,8 @@ final class HomeViewModelUnitTests: XCTestCase {
         let newSearch: Search = sut.findOrCreateItem(predicate: NSPredicate(format: "query == %@", "Star"))
         let newMovie: Movie = sut.findOrCreateItem(predicate: NSPredicate(format: "id == %d", 1))
         
-        XCTAssertEqual(newSearch, search)
-        XCTAssertEqual(newMovie, movie)
+        XCTAssertEqual(newSearch, search, "Searches should be identical")
+        XCTAssertEqual(newMovie, movie, "Movies should be identical")
     }
     
     func test_findOrCreateItem_whenFetchingNonExistingItem_returnsNewItem() async throws {
@@ -160,13 +160,13 @@ final class HomeViewModelUnitTests: XCTestCase {
         let newSearch: Search = sut.findOrCreateItem(predicate: NSPredicate(format: "query == %@", "Star"))
         let newMovie: Movie = sut.findOrCreateItem(predicate: NSPredicate(format: "id == %d", 1))
         
-        XCTAssertNotEqual(searchObjectID, newSearch.objectID)
-        XCTAssertNotEqual(movieObjectID, newMovie.objectID)
+        XCTAssertNotEqual(searchObjectID, newSearch.objectID, "Searches ids should be not identical")
+        XCTAssertNotEqual(movieObjectID, newMovie.objectID, "Movies ids should be not identical")
     }
     
     func test_hasReachedBottom_whenItemsLessthanPaginationLimit_returnsFalse() async throws {
         let movie = Movie.create(context: context)
-        XCTAssertFalse(sut.hasReachedToBottom(movies: [], movie: movie))
+        XCTAssertFalse(sut.hasReachedToBottom(movies: [], movie: movie), "Should return false for movies count less than pagination size")
     }
     
     func test_hasReachedBottom_whenItemsMorethanPaginationLimitAndItemIsAtTop_returnsFalse() {
@@ -175,7 +175,7 @@ final class HomeViewModelUnitTests: XCTestCase {
             movie.id = Int32(index)
             return movie
         }
-        XCTAssertFalse(sut.hasReachedToBottom(movies: movies, movie: movies[0]))
+        XCTAssertFalse(sut.hasReachedToBottom(movies: movies, movie: movies[0]), "Should return false for item at top of the list")
     }
     
     func test_hasReachedBottom_whenItemsMorethanPaginationLimitAndItemIsAtLast_returnsTrue() async throws {
@@ -184,7 +184,7 @@ final class HomeViewModelUnitTests: XCTestCase {
             movie.id = Int32(index)
             return movie
         }
-        XCTAssertTrue(sut.hasReachedToBottom(movies: movies, movie: movies.last!))
+        XCTAssertTrue(sut.hasReachedToBottom(movies: movies, movie: movies.last!), "Should return true for item at bottom of the list")
     }
 
 }

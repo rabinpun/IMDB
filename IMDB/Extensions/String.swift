@@ -16,10 +16,12 @@ extension String {
         return dateFormatter.date(from: self)
     }
     
+    /// Image path for the details screen with higher resolution
     var originalImagePath: String {
         return "https://image.tmdb.org/t/p/original\(self)"
     }
     
+    /// Image path for the list row with lower resolution
     var thumbnailImagePath: String {
         return "https://image.tmdb.org/t/p/w200\(self)"
     }

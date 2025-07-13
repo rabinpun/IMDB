@@ -19,6 +19,13 @@
     {
       "target" : {
         "containerPath" : "container:IMDB.xcodeproj",
+        "identifier" : "B264A2852E1F9C4300114549",
+        "name" : "IMDBUITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:IMDB.xcodeproj",
         "identifier" : "B264A27B2E1F9C4300114549",
         "name" : "IMDBTests"
       }

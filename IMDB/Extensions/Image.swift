@@ -17,4 +17,7 @@ extension Image {
         Image(systemName: "chevron.right")
     }
     
+    static func star(isFavorite: Bool) -> Image {
+        Image(systemName: isFavorite ? "star.fill" : "star")    }
+    
 }

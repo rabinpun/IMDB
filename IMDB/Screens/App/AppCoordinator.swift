@@ -10,7 +10,7 @@ import FlowStacks
 
 extension AppCoordinator {
     enum Screen: Hashable {
-      case details(Movie)
+      case details(Int32)
     }
 }
 
@@ -23,8 +23,8 @@ struct AppCoordinator: View {
             HomeScreen(viewModel: HomeViewModel(context: context))
                 .flowDestination(for: Screen.self) { screen in
                     switch screen {
-                    case .details(let movie):
-                        DetailsScreen(movie: movie)
+                    case .details(let id):
+                        DetailsScreen(id: id)
                     }
                 }
         }

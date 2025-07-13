@@ -9,7 +9,19 @@ import SwiftUI
 
 struct DetailsScreen: View {
     
-    let movie: Movie
+    let id: Int32
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest
+    var movies: FetchedResults<Movie>
+    
+    var movie: Movie? {
+        movies.first
+    }
+    
+    init(id: Int32) {
+        self.id = id
+        _movies = FetchRequest<Movie>(sortDescriptors: [], predicate: NSPredicate(format: "id == %d", id))
+    }
     
     var body: some View {
         ScrollView {
@@ -19,17 +31,17 @@ struct DetailsScreen: View {
                    posterImage()
                    
                    // Title
-                   Text(movie.title ?? "")
+                   Text(movie?.title ?? "")
                        .font(.title)
                        .fontWeight(.bold)
 
                    // Release Date
-                   Text("Release Date: \(movie.releaseDate!.formattedDate)")
+                   Text("Release Date: \(movie?.releaseDate?.formattedDate ?? "Unavailable")")
                        .font(.subheadline)
                        .foregroundColor(.secondary)
 
                    // Overview
-                   Text(movie.overview ?? "")
+                   Text(movie?.overview ?? "")
                        .font(.body)
                        .multilineTextAlignment(.leading)
 
@@ -39,12 +51,19 @@ struct DetailsScreen: View {
            }
            .navigationTitle("Movie Details")
            .navigationBarTitleDisplayMode(.inline)
+           .toolbar(content: {
+               ToolbarItem(placement: .topBarTrailing) {
+                   StarButton(isFavorite: movie?.isFavorite) {
+                       toggleFavorite()
+                   }
+               }
+           })
     }
     
     @ViewBuilder
     func posterImage() -> some View {
         Group {
-            if let posterPath = movie.posterImagePath, let url = URL(string: posterPath.originalImagePath) {
+            if let posterPath = movie?.posterImagePath, let url = URL(string: posterPath.originalImagePath) {
                 CachedAsyncImage(url: url)
                     .scaledToFit()
                     .frame(maxWidth: .infinity)
@@ -52,8 +71,13 @@ struct DetailsScreen: View {
             }
         }
     }
+    
+    func toggleFavorite() {
+        movie?.isFavorite.toggle()
+        try? context.save()
+    }
 }
 
 #Preview {
-    DetailsScreen(movie: .dummyMovie)
+    DetailsScreen(id: Movie.dummyMovie.id)
 }

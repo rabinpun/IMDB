@@ -33,10 +33,11 @@ struct HomeScreen: View {
             List {
                 if let movies = searchs.first?.movies {
                     ForEach(movies) { movie in
-                       MovieListRow(movie: movie)
-                            .onTapGesture {
-                                navigator.push(.details(movie))
-                            }
+                        Button(action: {
+                            navigator.push(.details(movie.id))
+                        }, label: {
+                            MovieListRow(id: movie.id)
+                        })
                         .task {
                             if viewModel.hasReachedToBottom(movies: movies, movie: movie) {
                                 await viewModel.fetchNextPage()

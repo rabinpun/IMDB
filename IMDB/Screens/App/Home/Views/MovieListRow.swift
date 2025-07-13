@@ -9,7 +9,19 @@ import SwiftUI
 
 struct MovieListRow: View {
     
-   let movie: Movie
+    let id: Int32
+    @Environment(\.managedObjectContext) var context
+    @FetchRequest
+    var movies: FetchedResults<Movie>
+    
+    var movie: Movie? {
+        movies.first
+    }
+    
+    init(id: Int32) {
+        self.id = id
+        _movies = FetchRequest<Movie>(sortDescriptors: [], predicate: NSPredicate(format: "id == %d", id))
+    }
     
     var body: some View {
         HStack {
@@ -19,14 +31,16 @@ struct MovieListRow: View {
             
             Spacer()
             
-            Image.chevronRight
+            StarButton(isFavorite: movie?.isFavorite) {
+                toggleFavorite()
+            }
         }
     }
     
     @ViewBuilder
-    func posterImage(for movie: Movie) -> some View {
+    func posterImage(for movie: Movie?) -> some View {
         Group {
-            if let posterPath = movie.posterImagePath, let url = URL(string: posterPath.thumbnailImagePath) {
+            if let posterPath = movie?.posterImagePath, let url = URL(string: posterPath.thumbnailImagePath) {
                 CachedAsyncImage(url: url)
                     .aspectRatio(contentMode: .fill)
             } else {
@@ -40,16 +54,21 @@ struct MovieListRow: View {
     }
     
     @ViewBuilder
-    func titleAndReleaseDate(for movie: Movie) -> some View {
+    func titleAndReleaseDate(for movie: Movie?) -> some View {
         VStack(alignment: .leading) {
-            Text(movie.title ?? "Title unavailable")
+            Text(movie?.title ?? "Title unavailable")
                 .font(.title2)
                 .lineLimit(2)
-            Text("Released on: \(movie.releaseDate?.formattedDate ?? "Unavailable")")
+            Text("Released on: \(movie?.releaseDate?.formattedDate ?? "Unavailable")")
         }
+    }
+    
+    func toggleFavorite() {
+        movie?.isFavorite.toggle()
+        try? context.save()
     }
 }
 
 #Preview {
-    MovieListRow(movie: Movie.dummyMovie)
+    MovieListRow(id: Movie.dummyMovie.id)
 }
